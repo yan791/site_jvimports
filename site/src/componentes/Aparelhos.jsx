@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Icone } from './Icone.jsx'
 import { Escudo } from './Marca.jsx'
+import { CLIENTES } from '../dados/conteudo.js'
 
 // Fotos dos aparelhos (geradas no ChatGPT, tratadas com ferramentas/processa-imagens.cjs).
 // A tela viva do site entra por cima da tela preta da foto; se a foto faltar, volta o aparelho em CSS.
@@ -83,6 +84,7 @@ export function Costas({ className = '', tom }) {
 // cópias (assim nenhum espaço reservado troca de estado no meio da rolagem)
 const sondas = new Map()
 function sondar(src) {
+  if (src.startsWith('clientes/') && !CLIENTES.prontas) return Promise.resolve(false)
   if (!sondas.has(src)) {
     sondas.set(src, new Promise((ok) => {
       const im = new Image()

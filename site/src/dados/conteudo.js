@@ -45,7 +45,10 @@ export const CLIENTES = {
     { linha1: 'Toda', linha2: 'Maceió' },
   ],
   titulo: ['Obrigado pela', 'preferência, Maceió'],
-  // PENDENTE: fotos reais dos clientes em public/clientes (cliente-01.jpg até cliente-09.jpg)
+  // PENDENTE: fotos reais dos clientes em public/clientes (cliente-01.jpg até cliente-09.jpg).
+  // Quando elas estiverem lá, troque "prontas" para true; antes disso o site nem procura os
+  // arquivos (evita os erros 404 no console) e mostra as molduras da marca.
+  prontas: false,
   fotos: Array.from({ length: 9 }, (_, i) => `clientes/cliente-${String(i + 1).padStart(2, '0')}.jpg`),
 }
 
