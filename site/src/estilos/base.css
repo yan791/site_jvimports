@@ -1,0 +1,220 @@
+/* JV Imports: a luz clara de vitrine do Bevel com o azul-marinho e o laranja da JV.
+   Medidas, raios, sombras e tipografia vêm dos tokens do Refero (tokens.css). */
+:root {
+  --papel: #fbfcfe;
+  --tinta: var(--color-ink);
+  --marinho: var(--color-charcoal);
+  --marinho-2: #013577;
+  --marinho-fundo: #011a31;
+  --nuvem: var(--color-cloud-card);
+  --nuvem-2: #e2e9f4;
+  --cinza: var(--color-body-gray);
+  --cinza-claro: #9aa3b0;
+  --linha: #dfe5ee;
+  --laranja: var(--color-accent);
+  --laranja-escuro: #e04a1f;
+  --coral: var(--color-coral-signal);
+  --pessego: #ffe3d6;
+  --ceu-1: #d2e5ff;
+  --ceu-2: #fff3ea;
+  --lilas: #e7e3fb;
+  --menta: #def4ec;
+  --azul-claro: #dde9fb;
+
+  --fonte: 'Geist Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --fonte-marca: 'Montserrat', 'Geist Variable', sans-serif;
+
+  /* escala do Bevel (80 / 64 / 40 / 24 px no desktop), encolhendo no celular */
+  --t-hero: clamp(2.75rem, 1.1rem + 4.6vw, var(--text-hero-display));
+  --t-display: clamp(2.4rem, 1.3rem + 3.2vw, var(--text-display));
+  --t-cartao: clamp(1.9rem, 1.4rem + 1.3vw, var(--text-card-heading));
+  --t-corpo: clamp(1.05rem, 0.92rem + 0.5vw, var(--text-body));
+
+  --raio-cartao: var(--radius-3xl);
+  --raio-campo: var(--radius-3xl-2);
+  --raio-img: var(--radius-2xl);
+  --raio-pilula: var(--radius-full);
+  --sombra-img: var(--shadow-md);
+  --sombra-flutua: var(--shadow-md-2);
+  --sombra-vidro: var(--shadow-subtle);
+
+  --suave: cubic-bezier(0.22, 1, 0.36, 1);
+  --mola: cubic-bezier(0.34, 1.45, 0.5, 1);
+  --largura: 1360px;
+  --margem: clamp(16px, 3vw, 40px);
+  --secao: clamp(64px, 6.4vw, var(--spacing-96));
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { overflow-x: hidden; overflow-x: clip; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--fonte);
+  font-size: var(--t-corpo);
+  line-height: 1.35;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+h1, h2, h3, p { margin: 0; }
+::selection { background: var(--laranja); color: #fff; }
+:focus-visible { outline: 2px solid var(--laranja); outline-offset: 3px; border-radius: 12px; }
+
+.pular { position: fixed; left: 12px; top: -60px; z-index: 100; padding: 10px 16px; border-radius: 99px; background: var(--marinho); color: #fff; font-size: 15px; transition: top 0.3s var(--suave); }
+.pular:focus { top: 12px; }
+
+.container { width: min(100% - 2 * var(--margem), var(--largura)); margin-inline: auto; }
+
+/* Títulos no ritmo do Bevel: peso 600, entrelinha curta, letras apertadas */
+.titulo {
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: var(--leading-display);
+  text-wrap: balance;
+}
+.titulo--hero { font-size: var(--t-hero); }
+.titulo--display { font-size: var(--t-display); }
+.titulo--cartao { font-size: var(--t-cartao); letter-spacing: -0.03em; }
+.titulo .apagado { color: var(--cinza-claro); }
+.texto { color: var(--cinza); line-height: 1.32; max-width: 34ch; text-wrap: pretty; }
+.centro { text-align: center; margin-inline: auto; }
+
+/* Linhas de título que sobem de trás de uma máscara */
+.linha-mascara { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.linha-mascara > span { display: block; transform: translateY(105%); transition: transform 1.1s var(--suave); transition-delay: calc(var(--i, 0) * 90ms); }
+.in .linha-mascara > span, .linha-mascara.in > span { transform: none; }
+
+/* Entradas: o contêiner ganha .in quando aparece */
+[data-revela] { opacity: 0; transform: translateY(26px); transition: opacity 0.9s var(--suave), transform 1.1s var(--suave); transition-delay: calc(var(--i, 0) * 80ms); }
+.in [data-revela], [data-revela].in { opacity: 1; transform: none; }
+
+/* Botão pílula escuro (o "Download" do Bevel, em azul-marinho) */
+.pilula {
+  --fundo: var(--marinho);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px 12px 16px;
+  border-radius: var(--raio-pilula);
+  background: var(--fundo);
+  color: var(--nuvem);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.2;
+  isolation: isolate;
+  overflow: hidden;
+  transition: transform 0.5s var(--mola), box-shadow 0.5s var(--suave);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14), 0 8px 22px -12px rgba(1, 40, 73, 0.9);
+}
+.pilula svg { width: 20px; height: 20px; flex: none; }
+.pilula::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(120px 60px at var(--mx, 50%) var(--my, 120%), rgba(252, 98, 54, 0.75), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.45s var(--suave);
+}
+.pilula:hover { transform: translateY(-2px); }
+.pilula:hover::before { opacity: 1; }
+.pilula:active { transform: scale(0.97); }
+.pilula--grande { padding: 15px 28px 15px 20px; font-size: 17px; }
+.pilula--clara { --fundo: #fff; color: var(--marinho); box-shadow: var(--sombra-flutua); }
+.pilula__seta { transition: transform 0.45s var(--mola); }
+.pilula:hover .pilula__seta { transform: translateX(3px); }
+
+/* Marca */
+.marca { display: inline-flex; align-items: center; gap: 10px; color: var(--tinta); }
+.marca__escudo { width: 26px; height: 30px; flex: none; }
+.marca__nome { display: flex; flex-direction: column; font-family: var(--fonte-marca); font-weight: 500; font-size: 17px; letter-spacing: 0.01em; line-height: 1; text-transform: uppercase; }
+.marca__nome small { font-size: 7.5px; letter-spacing: 0.62em; margin-top: 4px; color: var(--cinza); font-weight: 500; }
+
+/* Topo: cápsula flutuante */
+.topo { position: fixed; top: 14px; left: 0; right: 0; z-index: 50; display: flex; justify-content: center; pointer-events: none; }
+.topo__barra {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 7px 7px 18px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(12px) saturate(1.3);
+  -webkit-backdrop-filter: blur(12px) saturate(1.3);
+  box-shadow: inset 0 1px 0 #fff, 0 6px 24px -12px rgba(1, 26, 49, 0.35);
+  transition: background 0.5s var(--suave), box-shadow 0.5s var(--suave);
+}
+.topo--escuro .topo__barra { background: rgba(20, 34, 54, 0.72); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 6px 24px -12px rgba(0, 0, 0, 0.6); }
+.topo--escuro .marca, .topo--escuro .topo__link { color: #e9eef6; }
+.topo--escuro .marca__nome small { color: #9fb0c6; }
+.topo__links { display: flex; gap: 2px; margin: 0 10px 0 22px; }
+.topo__link { padding: 8px 12px; border-radius: 20px; font-size: var(--text-nav); font-weight: 500; color: var(--cinza); transition: color 0.3s var(--suave), background 0.3s var(--suave); }
+.topo__link:hover { color: var(--tinta); background: rgba(1, 40, 73, 0.06); }
+.topo--escuro .topo__link:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+.topo .pilula { padding: 9px 16px 9px 12px; font-size: 15px; }
+.topo .pilula svg { width: 18px; height: 18px; }
+
+/* Cartão flutuante do WhatsApp (o cartão de QR do Bevel) */
+.flutuante-conversa {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px 10px 10px;
+  border-radius: 18px;
+  background: var(--marinho);
+  color: var(--nuvem);
+  box-shadow: rgba(1, 26, 49, 0.3) 0 10px 30px -8px;
+  transform: translateY(140%);
+  opacity: 0;
+  transition: transform 0.8s var(--mola), opacity 0.6s var(--suave);
+}
+.flutuante-conversa.visivel { transform: none; opacity: 1; }
+.flutuante-conversa__icone { position: relative; width: 46px; height: 46px; border-radius: 12px; background: #fff; display: grid; place-items: center; }
+.flutuante-conversa__icone svg { width: 26px; height: 30px; }
+.flutuante-conversa__icone::after { content: ''; position: absolute; top: -3px; right: -3px; width: 12px; height: 12px; border-radius: 50%; background: #31ce01; border: 2px solid var(--marinho); animation: pulso 2.4s ease-in-out infinite; }
+.flutuante-conversa strong { display: block; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+.flutuante-conversa span { display: block; font-size: 12.5px; color: #a9bbd2; margin-top: 2px; }
+.flutuante-conversa:hover { transform: translateY(-3px); }
+@keyframes pulso { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.82); opacity: 0.7; } }
+
+/* Carregamento: o escudo se desenha e sai */
+.carregando { position: fixed; inset: 0; z-index: 200; display: grid; place-items: center; background: var(--papel); transition: opacity 0.7s var(--suave), visibility 0.7s; }
+.carregando.saiu { opacity: 0; visibility: hidden; }
+.carregando svg { width: 64px; height: 72px; overflow: visible; }
+.carregando path { fill: transparent; stroke: var(--laranja); stroke-width: 10; stroke-dasharray: 3200; stroke-dashoffset: 3200; animation: desenha 1.1s var(--suave) forwards, preenche 0.5s 0.75s var(--suave) forwards; }
+@keyframes desenha { to { stroke-dashoffset: 0; } }
+@keyframes preenche { to { fill: var(--laranja); stroke-width: 0; } }
+
+body.pausado *, body.pausado *::before, body.pausado *::after { animation-play-state: paused !important; }
+
+@media (pointer: coarse) {
+  .pilula, .topo__link { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+}
+
+@media (max-width: 860px) {
+  .topo__links { display: none; }
+  .topo__barra { padding-left: 14px; gap: 12px; }
+  .flutuante-conversa { right: 12px; bottom: 12px; gap: 10px; padding: 7px 14px 7px 7px; border-radius: 14px; }
+  .flutuante-conversa__icone { width: 36px; height: 36px; border-radius: 10px; }
+  .flutuante-conversa__icone svg { width: 20px; height: 24px; }
+  .flutuante-conversa span span { display: none; }
+}

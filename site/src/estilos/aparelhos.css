@@ -1,0 +1,151 @@
+/* iPhone em CSS. Tudo dentro dele é medido em cqw (1% da largura do aparelho). */
+.celular {
+  --w: 280px;
+  --titanio-1: #c9ccd1;
+  --titanio-2: #7d8087;
+  position: relative;
+  width: var(--w);
+  aspect-ratio: 71.9 / 150;
+  container-type: inline-size;
+  border-radius: calc(var(--w) * 0.2);
+  padding: calc(var(--w) * 0.014);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.55), transparent 12%, transparent 88%, rgba(255, 255, 255, 0.4)),
+    linear-gradient(160deg, var(--titanio-1), var(--titanio-2) 45%, var(--titanio-1) 70%, var(--titanio-2));
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.2),
+    0 30px 60px -28px rgba(1, 26, 49, 0.55);
+}
+.celular--laranja { --titanio-1: #ff9a6b; --titanio-2: #d9532a; }
+.celular--marinho { --titanio-1: #5a6f8f; --titanio-2: #22324b; }
+.celular__botao { position: absolute; width: calc(var(--w) * 0.012); border-radius: 2px; background: linear-gradient(90deg, var(--titanio-2), var(--titanio-1)); }
+.celular__botao--acao { left: calc(var(--w) * -0.008); top: 17%; height: 4.5%; }
+.celular__botao--vol1 { left: calc(var(--w) * -0.008); top: 24%; height: 8%; }
+.celular__botao--vol2 { left: calc(var(--w) * -0.008); top: 34%; height: 8%; }
+.celular__botao--lado { right: calc(var(--w) * -0.008); top: 27%; height: 12%; }
+.celular__tela {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  border-radius: calc(var(--w) * 0.186);
+  border: calc(var(--w) * 0.028) solid #07080a;
+  background: #f4f6fa;
+  color: var(--tinta);
+  font-size: 4.3cqw;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  isolation: isolate;
+}
+.celular--escuro .celular__tela { background: #0b0d12; color: #f1f4f8; }
+.celular__barra { position: absolute; z-index: 5; top: 0; left: 0; right: 0; height: 12.5cqw; display: flex; align-items: center; justify-content: space-between; padding: 0 7cqw 0 9cqw; }
+.celular__hora { font-size: 4.6cqw; font-weight: 600; letter-spacing: -0.02em; }
+.celular__ilha { position: absolute; left: 50%; top: 2.6cqw; width: 30cqw; height: 8.6cqw; transform: translateX(-50%); border-radius: 99px; background: #000; }
+.celular__ilha--solta { z-index: 6; }
+.celular__status { display: flex; align-items: center; gap: 1.2cqw; }
+.celular__status svg { width: 4.2cqw; height: 4.2cqw; }
+.celular__bat { position: relative; width: 6.2cqw; height: 3cqw; border-radius: 1cqw; border: 0.45cqw solid currentColor; opacity: 0.9; }
+.celular__bat::after { content: ''; position: absolute; inset: 0.4cqw; right: 1.2cqw; border-radius: 0.4cqw; background: currentColor; }
+
+/* Com a foto do iPhone (688x1338) como moldura: a foto fica embaixo e a tela viva entra no lugar da
+   tela preta, deixando ~15 px de borda preta como a de um iPhone de verdade.
+   Medido na foto: preto de 20 a 668 px na largura e de 14 a 1320 px na altura, cantos com ~100 px. */
+.celular--foto {
+  aspect-ratio: 688 / 1338;
+  background: none;
+  padding: 0;
+  border-radius: 19.9% / 10.2%;
+  /* sombra no próprio contorno (sem filter, que redesenharia a tela viva a cada mudança) */
+  box-shadow: 0 34px 50px -26px rgba(1, 26, 49, 0.5), 0 10px 18px -12px rgba(1, 26, 49, 0.25);
+}
+.celular--foto .celular__botao { display: none; }
+.celular__moldura { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.celular--foto .celular__tela {
+  position: absolute;
+  top: 2.17%;
+  bottom: 2.47%;
+  left: 5.09%;
+  right: 4.94%;
+  height: auto;
+  border: 0;
+  border-radius: 13.7% / 6.66%;
+}
+.celular--foto .celular__ilha { top: 3.3cqw; width: 25.4cqw; height: 6.6cqw; }
+.celular--foto .celular__barra { padding: 0 6.4cqw 0 8cqw; }
+
+/* Apple Watch em foto (535x867): a tela viva entra no retângulo preto medido na imagem */
+.relogio--foto { aspect-ratio: 535 / 867; }
+.relogio__foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  /* as pulseiras foram cortadas na geração: somem suaves nas pontas */
+  mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+}
+.relogio--foto .relogio__tela {
+  position: absolute;
+  left: 8.6%;
+  right: 14.4%;
+  top: 21.2%;
+  bottom: 22.2%;
+  height: auto;
+  border-radius: 15% / 12.4%;
+}
+.relogio--foto .tela-relogio, .relogio--foto .final__relogio-tela { font-size: 1em; }
+
+/* miniaturas do iPhone de costas: as outras cores saem do laranja com filtro */
+.costas { display: block; width: 100%; height: 100%; object-fit: contain; }
+.costas--azul { filter: hue-rotate(196deg) saturate(0.75) brightness(0.62); }
+.costas--prata { filter: grayscale(1) brightness(1.32) contrast(0.9); }
+
+/* Apple Watch em CSS */
+.relogio { --w: 120px; position: relative; width: var(--w); aspect-ratio: 0.86; container-type: inline-size; }
+.relogio__caixa {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: 30%;
+  padding: 5.5%;
+  background: linear-gradient(150deg, #5b6270, #1d222b 40%, #3d4350 75%, #12161d);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18), 0 26px 40px -22px rgba(1, 26, 49, 0.7);
+}
+.relogio__tela { height: 100%; border-radius: 26%; background: #000; overflow: hidden; color: #fff; font-size: 9cqw; line-height: 1.1; position: relative; }
+.relogio__pulseira { position: absolute; left: 13%; right: 13%; height: 70%; z-index: 1; background: linear-gradient(90deg, #0d2342, #1b3a66 50%, #0d2342); }
+.relogio__pulseira--cima { bottom: 60%; border-radius: 12% 12% 0 0 / 8% 8% 0 0; }
+.relogio__pulseira--baixo { top: 60%; border-radius: 0 0 12% 12% / 0 0 8% 8%; }
+.relogio__coroa { position: absolute; z-index: 1; right: -5%; top: 26%; width: 8%; height: 17%; border-radius: 3px; background: linear-gradient(90deg, #7a808c, #2a2f38); }
+.relogio__coroa::after { content: ''; position: absolute; inset: 30% 0 30% 40%; border-radius: 2px; background: var(--laranja); }
+.relogio__botao { position: absolute; z-index: 1; right: -3%; top: 52%; width: 5%; height: 20%; border-radius: 3px; background: #2a2f38; }
+
+/* Foto de cliente ou espaço reservado com a cara dos posts da JV */
+.foto-cliente {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--raio-img);
+  overflow: hidden;
+  background: var(--marinho);
+  box-shadow: var(--sombra-img);
+}
+.foto-cliente img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s var(--suave); }
+.foto-cliente--ok img { opacity: 1; }
+.foto-cliente__vazia {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 14px;
+  color: rgba(255, 255, 255, 0.92);
+  text-align: center;
+  background:
+    radial-gradient(120% 70% at 85% 0%, rgba(252, 98, 54, 0.95), transparent 60%),
+    linear-gradient(170deg, var(--marinho-2), var(--marinho) 60%);
+}
+.foto-cliente__escudo { position: absolute; width: 78%; top: 6%; left: 50%; transform: translateX(-50%) rotate(calc((var(--n) - 4) * 3deg)); color: rgba(255, 255, 255, 0.14); }
+.foto-cliente__vazia span { position: relative; font-size: 11px; line-height: 1.35; letter-spacing: 0.02em; color: rgba(255, 255, 255, 0.7); }
+.foto-cliente__vazia b { font-weight: 600; color: #fff; }

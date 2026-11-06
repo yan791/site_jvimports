@@ -1,0 +1,17 @@
+# dependências e builds
+node_modules/
+site/dist/
+
+# originais das imagens do ChatGPT: o site usa as versões tratadas em site/public/aparelhos
+/Imagens/
+site/public/aparelhos/_bruto/
+
+# anotações internas do projeto (o repositório é público)
+/PENDENCIAS.md
+/PROMPTS-IMAGENS.md
+
+# configuração local do preview do app
+site/.claude/
+
+*.log
+.DS_Store

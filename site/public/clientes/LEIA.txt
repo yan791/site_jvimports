@@ -1,0 +1,14 @@
+Coloque aqui as fotos dos clientes com estes nomes:
+
+cliente-01.jpg
+cliente-02.jpg
+cliente-03.jpg
+cliente-04.jpg
+cliente-05.jpg
+cliente-06.jpg
+cliente-07.jpg
+cliente-08.jpg
+cliente-09.jpg
+
+Formato retrato 4:5 (ex.: 1080 x 1350), como os posts do Instagram.
+A cliente-01.jpg também aparece dentro da conversa da seção "Entrega".
