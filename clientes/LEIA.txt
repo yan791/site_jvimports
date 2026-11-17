@@ -1,0 +1,3 @@
+Fotos dos clientes (cliente-01.jpg a cliente-10.jpg), formato retrato 4:5, 720 x 900.
+Para acrescentar mais: coloque o próximo arquivo aqui e aumente QUANTAS_FOTOS em src/dados/conteudo.js.
+A cliente-01.jpg também aparece dentro da conversa da seção "Entrega".
